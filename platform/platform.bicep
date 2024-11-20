@@ -20,7 +20,7 @@ module managementResourceDeployment 'management/management.bicep' = {
   }
 }
 
-module connectivityResourcesDeployment 'connectivity/connectivity.bicep' = {
+module connectivityResourceDeployment 'connectivity/connectivity.bicep' = {
   scope: connectivityResourceGroup
   name: 'connectivityResourcesDeployment'
   params: {
