@@ -33,4 +33,7 @@ module firewallDeployment 'resources/firewall.bicep' = {
     virtualNetworkName: vnetName
     subnetName: firewallSubnetName
   }
+  dependsOn: [
+    virtualNetworkDeployment
+  ]
 }

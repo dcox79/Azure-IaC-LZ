@@ -4,6 +4,7 @@ param subnetName string
 
 resource publicIp 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
   name: 'firewall-ip'
+  location: location
   sku: {
     name: 'Standard'
   }
@@ -12,9 +13,9 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
 }
 }
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-03-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-03-01' existing = {
   name: virtualNetworkName
-
+  
   resource subnet 'subnets@2024-03-01' existing = {
     name: subnetName
   }
