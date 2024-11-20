@@ -11,3 +11,19 @@ resource connectivityResourceGroup 'Microsoft.Resources/resourceGroups@2024-07-0
   name: 'connectivity'
   location: location
 }
+
+module managementResourcesDeployment 'management/management.bicep' = {
+  scope: managementResourceGroup
+  name: 'managementResourceDeployment'
+  params: {
+    location: location
+  }
+}
+
+module connectivityResourcesDeployment 'connectivity/connectivity.bicep' = {
+  scope: connectivityResourceGroup
+  name: 'connectivityResourceDeployment'
+  params: {
+    location: location
+  }
+}
