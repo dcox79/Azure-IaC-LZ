@@ -38,6 +38,24 @@ resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
         }
       }
     ]
+    networkRuleCollections: [{
+      name: 'rulesLZ101'
+      properties: {
+        priority: 100
+        action: {
+          type: 'Allow'
+        }
+        rules: [
+          {
+            name: 'allow-outbound-to-internet'
+            protocols: ['Any']
+            sourceAddresses: ['10.1.101.0/24']
+            destinationAddresses: ['*']
+            destinationPorts: ['*']
+          }
+        ]
+      }
+    }]
   }
 }
 

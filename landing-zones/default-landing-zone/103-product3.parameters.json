@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "centralus"
+        },
+        "productName": {
+            "value": "product3"
+        },
+        "spokeNumber": {
+            "value": "103"
+        }
+    }
+}
