@@ -61,7 +61,6 @@ resource routeTable 'Microsoft.Network/routeTables@2024-03-01' = {
       name: 'defaultRoute'
       properties: {
         addressPrefix: '0.0.0.0/0'
-        hasBgpOverride: false
         nextHopIpAddress: hubFirewall.properties.ipConfigurations[0].properties.privateIPAddress
         nextHopType: 'VirtualAppliance'
       }
