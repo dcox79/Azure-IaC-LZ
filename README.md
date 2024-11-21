@@ -17,7 +17,7 @@ Create reusable landing zone template
 
 **Deploy the first landing zone**
 
-`az stack sub create --location centralus --deny-settings-mode None --action-on-unmanage detach--name landingZoneProduct1 --template-spec /subscriptions/<SubscriptionID>/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\101-product1.parameters.json`
+`az stack sub create --location centralus --deny-settings-mode None --name landingZoneProduct1 --template-spec /subscriptions/<SubscriptionID>/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\101-product1.parameters.json --action-on-unmanage detachAll`
 
 
 ## Connectivity
