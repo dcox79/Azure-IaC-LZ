@@ -9,7 +9,7 @@ Prep Subscription: Delete all resources in the current subscription using Azure 
 `az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_  }`
 
 Create reusable landing zone template 
-`az ts create --name default-landing-zone --location centralus --resource-group management --template-file .\landing-zones\default-landing-zone.bicep`
+`az ts create --name default-landing-zone --version "1.0"--location centralus --resource-group management --template-file .\landing-zones\default-landing-zone.bicep`
 
 **Deploy the platform**
 
