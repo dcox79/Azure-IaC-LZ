@@ -2,6 +2,7 @@ param location string
 param virtualNetworkName string
 param subnetName string
 
+
 resource publicIp 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
   name: 'firewall-ip'
   location: location
@@ -39,7 +40,7 @@ resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
       }
     ]
     networkRuleCollections: [{
-      name: 'rulesLZ101'
+      name: 'spoke1-default-rules'
       properties: {
         priority: 100
         action: {
