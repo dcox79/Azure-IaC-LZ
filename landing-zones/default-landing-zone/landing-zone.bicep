@@ -10,6 +10,10 @@ resource hubNetwork 'Microsoft.Network/virtualNetworks@2024-03-01' existing = {
   scope: resourceGroup(connectivityResourceGroupName)
 }
 
+resource hubFirewall 'Microsoft.Network/azureFirewalls@2024-03-01' existing = {
+  name: 'firewall'
+  scope: resourceGroup(connectivityResourceGroupName)
+}
 
 resource spokeNetwork 'Microsoft.Network/virtualNetworks@2024-03-01' = {
   name: virtualNetworkName
@@ -58,7 +62,7 @@ resource routeTable 'Microsoft.Network/routeTables@2024-03-01' = {
       properties: {
         addressPrefix: '0.0.0.0/0'
         hasBgpOverride: false
-        nextHopIpAddress: '10.0.10.4'
+        nextHopIpAddress: hubFirewall.properties.ipConfigurations[0].properties.privateIPAddress
         nextHopType: 'VirtualAppliance'
       }
     }]
