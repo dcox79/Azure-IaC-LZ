@@ -5,8 +5,9 @@ This repository contains basic Azure Bicep IaC code for a tenant's Sandbox envir
 This deployment does not need policies and management groups because they are already deployed using Azure's Cloud Adoption Framework's landing zone accelerator.
 
 **[Optional Step]**
-Prep Subscription: Delete all resources in the current subscription using Azure CLI
+Prep Subscription: Verify your in the correct Subscription and Delete all resources in the current subscription using Azure CLI
 
+`az account show --query "[name,id]" -o tsv`
 `az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_ -y }`
 
 **Deploy the platform** Deploys log analytics workspace, firewall, route table, and virtual network.
