@@ -4,16 +4,21 @@ This repository contains basic Azure Bicep IaC code for a tenant's Sandbox envir
 
 This deployment does not need policies and management groups because they are already deployed using Azure's Cloud Adoption Framework's landing zone accelerator.
 
-**[Optional Steps]**
+**[Optional Step]**
 Prep Subscription: Delete all resources in the current subscription using Azure CLI
+
 `az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_  }`
 
-Create reusable landing zone template 
-`az ts create --name default-landing-zone --version "1.0"--location centralus --resource-group management --template-file .\landing-zones\default-landing-zone.bicep`
-
-**Deploy the platform**
+**Deploy the platform** Deploys log analytics workspace, firewall, route table, and virtual network.
 
 `az deployment sub create --location centralus --parameters .\platform\platform.bicepparam`
+
+**[Optional Step]**
+Create reusable landing zone template
+ 
+ `az ts create --name default-landing-zone --version "1.0"--location centralus --resource-group management --template-file .\landing-zones\default-landing-zone.bicep`
+
+
 
 **Deploy the first landing zone**
 
