@@ -7,7 +7,7 @@ This deployment does not need policies and management groups because they are al
 **[Optional Step]**
 Prep Subscription: Delete all resources in the current subscription using Azure CLI
 
-`az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_  }`
+`az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_ -y }`
 
 **Deploy the platform** Deploys log analytics workspace, firewall, route table, and virtual network.
 
