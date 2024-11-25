@@ -4,27 +4,46 @@ This repository contains basic Azure Bicep IaC code for a tenant's Sandbox envir
 
 This deployment does not need policies and management groups because they are already deployed using Azure's Cloud Adoption Framework's landing zone accelerator.
 
+**Modify parameters files**
+
+.\landing-zones\default-landing-zone\<###>-product<#>.parameters.json
+
 **[Optional Step]**
 Prep Subscription: Verify your in the correct Subscription and Delete all resources in the current subscription using Azure CLI
 
+`az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_ -y }`
+
+**copy subscription ID and Create ENV variable**
+
 `az account show --query "[name,id]" -o tsv`
 
-`az group list --query "[].name" -o tsv | ForEach-Object { az group delete -n $_ -y }`
+`$SUBSCRIPTIONID="<Subscription ID>"`
 
 **Deploy the platform** Deploys log analytics workspace, firewall, route table, and virtual network.
 
 `az deployment sub create --location centralus --parameters .\platform\platform.bicepparam`
 
-**[Optional Step]**
+**[Create Template Spec]**
 Create reusable landing zone template
  
  `az ts create --name default-landing-zone --version "1.0"--location centralus --resource-group management --template-file .\landing-zones\default-landing-zone.bicep`
 
 
 
-**Deploy the first landing zone**
+**Deploy the First landing zone**
 
-`az stack sub create --location centralus --deny-settings-mode None --name landingZoneProduct1 --template-spec /subscriptions/<SubscriptionID>/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\101-product1.parameters.json --action-on-unmanage detachAll`
+
+`az stack sub create --location centralus --deny-settings-mode None --name landingZoneProduct1 --template-spec /subscriptions/$SUBSCRIPTIONID/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\101-product1.parameters.json --action-on-unmanage detachAll`
+
+**Deploy the Second landing zone**
+
+
+`az stack sub create --location centralus --deny-settings-mode None --name landingZoneProduct2 --template-spec /subscriptions/$SUBSCRIPTIONID/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\102-product2.parameters.json --action-on-unmanage deleteAll`
+
+**Deploy the Third landing zone**
+
+
+`az stack sub create --location centralus --deny-settings-mode None --name landingZoneProduct3 --template-spec /subscriptions/$SUBSCRIPTIONID/resourceGroups/management/providers/Microsoft.Resources/templateSpecs/default-landing-zone/versions/1.0 --parameters .\landing-zones\default-landing-zone\103-product3.parameters.json --action-on-unmanage detachAll`
 
 
 ## Connectivity
