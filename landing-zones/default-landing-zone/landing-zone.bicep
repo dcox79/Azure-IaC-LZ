@@ -53,7 +53,7 @@ module peeringHubtoSpokeDeployment 'hub-to-spoke-peering.bicep' = {
 }
 
 resource routeTable 'Microsoft.Network/routeTables@2024-03-01' = {
-  name: 'defaultRouteTable'
+  name: 'spoke${spokeNumber}RouteTable'
   location: location
   properties: {
     disableBgpRoutePropagation: true
