@@ -1,6 +1,7 @@
 param location string
 param productName string
 param spokeNumber string
+param deployDefaultSubnet bool
 
 var virtualNetworkName = 'vnet-${productName}'
 var connectivityResourceGroupName = 'connectivity'
@@ -24,9 +25,19 @@ resource spokeNetwork 'Microsoft.Network/virtualNetworks@2024-03-01' = {
         '10.1.${spokeNumber}.0/24'
       ]
     }
+    subnets: deployDefaultSubnet ? [
+      {
+        name: 'default'
+        properties: {
+          addressPrefix: '10.1.${spokeNumber}.0/24'
+          routeTable: {
+            id: routeTable.id
+          }
+        }
+      }
+    ] : []
   }
 }
-
 
 resource peeringSpokeToHub 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2024-03-01' = {
   parent: spokeNetwork

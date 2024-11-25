@@ -6,10 +6,13 @@
             "value": "centralus"
         },
         "productName": {
-            "value": "webapp"
+            "value": "product2"
         },
         "spokeNumber": {
             "value": "102"
+        },
+        "deployDefaultSubnet": {
+            "value": false
         }
     }
 }

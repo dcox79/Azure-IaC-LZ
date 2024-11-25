@@ -16,6 +16,6 @@ module spokeResourceDeployment 'default-landing-zone/landing-zone.bicep' = {
     spokeNumber: spokeNumber
     location: location
     productName: productName
+    deployDefaultSubnet: true
   }
 }
-

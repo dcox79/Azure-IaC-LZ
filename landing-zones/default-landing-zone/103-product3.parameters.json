@@ -10,6 +10,9 @@
         },
         "spokeNumber": {
             "value": "103"
+        },
+        "deployDefaultSubnet": {
+            "value": true
         }
     }
 }
